@@ -42,6 +42,7 @@
 	    }
 	  
 	    var username = window.localStorage.getItem('username');
+      socket.emit('announce_me', username);
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
@@ -72,6 +73,14 @@
           }
         }
 
+        messages.appendChild(msgItem);
+        messages.appendChild(document.createElement('hr'));
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      socket.on('new_user', function(username) {
+        var msgItem = document.createElement('li');
+        msgItem.textContent = "*[SYSTEM] " + username + " joined!";
         messages.appendChild(msgItem);
         messages.appendChild(document.createElement('hr'));
         window.scrollTo(0, document.body.scrollHeight);

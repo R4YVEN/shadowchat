@@ -15,6 +15,10 @@ io.on('connection', (socket) => {
   socket.on('chat_message', ({ username, msg}) => {
     io.emit('chat_message', username, msg);
   });
+
+  socket.on('announce_me', (username) => {
+    io.emit('new_user', username);
+  });
 });
 
 http.listen(port,'0.0.0.0', () => {
