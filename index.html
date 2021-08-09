@@ -52,19 +52,23 @@
         var msgItem = document.createElement('li');
         msgItem.textContent = "[" + username + "]  " + msg ;
 
-        if(((msg.indexOf(".png") != -1) || (msg.indexOf(".jpg") != -1)) && IsValidUrl(msg))
+        if(IsValidUrl(msg) === true)
         {
-          HandleImage(msg, msgItem);
-        }
+          if((msg.indexOf(".png") != -1) || (msg.indexOf(".jpg") != -1))
+          {
+            HandleImage(msg, msgItem);
+          }
 
-        if(((msg.indexOf(".mp3") != -1) || (msg.indexOf(".wav") != -1)) && IsValidUrl(msg) === true)
-        {
-          HandleAudio(msg, msgItem);
+          if((msg.indexOf(".mp3") != -1) || (msg.indexOf(".wav") != -1))
+          {
+            HandleAudio(msg, msgItem);
+          }
         }
 
         messages.appendChild(msgItem);
         window.scrollTo(0, document.body.scrollHeight);
       });
+      
     </script>
   </body>
 </html>
