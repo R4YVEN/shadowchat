@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,16 +21,17 @@
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/message_handler.js"></script>
 
     <script>
       var socket = io();
 
-	  if(window.localStorage.getItem('username') == null)
-	  {
-		window.localStorage.setItem('username', 'user' + Math.floor(Math.random() * 10000));
-	  }
+	    if(window.localStorage.getItem('username') == null)
+	    {
+		      window.localStorage.setItem('username', 'user' + Math.floor(Math.random() * 10000));
+	    }
 	  
-	  var username = window.localStorage.getItem('username');
+	    var username = window.localStorage.getItem('username');
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
@@ -46,9 +46,15 @@
       });
 
       socket.on('chat_message', function(username, msg) {
-        var item = document.createElement('li');
-        item.textContent = username + ": " + msg;
-        messages.appendChild(item);
+        var msgItem = document.createElement('li');
+        msgItem.textContent = username + ": " + msg ;
+
+        if(msg.indexOf(".png") != -1)
+        {
+          HandleImage(msgItem);
+        }
+
+        messages.appendChild(msgItem);
         window.scrollTo(0, document.body.scrollHeight);
       });
     </script>

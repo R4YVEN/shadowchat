@@ -5,6 +5,7 @@ const port = process.env.PORT || 1337;
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
+  res.send(__dirname + '/js/message_handler.js');
 });
 
 io.on('connection', (socket) => {
