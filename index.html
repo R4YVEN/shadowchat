@@ -13,8 +13,10 @@
 
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages > li { padding: 0.5rem 1rem; }
-      #messages > li:nth-child(even) { background: #dadada; }
-      #messages > li:nth-child(odd) { background: #efefef; }
+      #messages > li:nth-child(2n+1) { background: #dadada; }
+      #messages > li:nth-child(4n+1) { background: #efefef; }
+
+      hr { margin: 0px 0; border: 0.5px solid rgb(214, 214, 214);}
     </style>
   </head>
   <body>
@@ -71,6 +73,7 @@
         }
 
         messages.appendChild(msgItem);
+        messages.appendChild(document.createElement('hr'));
         window.scrollTo(0, document.body.scrollHeight);
       });
 
