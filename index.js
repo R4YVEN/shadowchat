@@ -5,6 +5,7 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 1337;
 
 app.use('/js', express.static('js'));
+app.use('/images', express.static('images'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');

@@ -36,3 +36,28 @@ function HandleImage(msg, msgItem)
     oImg.setAttribute('onclick', "ToggleBigImage(" + imgId + ");");
     msgItem.appendChild(oImg);
 }
+
+function HandleAudio(msg, msgItem)
+{
+    var audioId = Math.floor(Math.random() * 1000000);
+    var oAudio = document.createElement("audio");
+
+    //Padding
+    msgItem.appendChild(document.createElement("br"));
+    msgItem.appendChild(document.createElement("br"));
+
+    oAudio.setAttribute('id', "audio-" + audioId);
+    oAudio.setAttribute('controls', "");
+    oAudio.setAttribute('src', msg);
+    msgItem.appendChild(oAudio);
+}
+
+function IsValidUrl(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return pattern.test(str);
+  }
