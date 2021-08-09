@@ -22,10 +22,14 @@
 	<img src="images/sc_logo.png"></img>
     <ul id="messages"></ul>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="input" autocomplete="off" />
+      <button>Send</button>
+      <button onclick='ChangeUsername()'>Change Username</button>
     </form>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/message_handler.js"></script>
+    <script src="/js/utilities.js"></script>
 
     <script>
       var socket = io();
