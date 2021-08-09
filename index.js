@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
 
   socket.on('announce_me', (username) => {
     io.emit('new_user', username);
-    userr = username;
+    g_username = username;
   });
 
   socket.on('disconnect', function() {
