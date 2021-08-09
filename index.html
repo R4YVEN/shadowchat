@@ -47,11 +47,11 @@
 
       socket.on('chat_message', function(username, msg) {
         var msgItem = document.createElement('li');
-        msgItem.textContent = username + ": " + msg ;
+        msgItem.textContent = "[" + username + "]  " + msg ;
 
-        if(msg.indexOf(".png") != -1)
+        if((msg.indexOf(".png") != -1) || (msg.indexOf(".jpg") != -1))
         {
-          HandleImage(msgItem);
+          HandleImage(msg, msgItem);
         }
 
         messages.appendChild(msgItem);
