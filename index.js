@@ -12,12 +12,26 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+  var g_username;
+
   socket.on('chat_message', ({ username, msg}) => {
-    io.emit('chat_message', username, msg);
+    if(username.length < 12 && username.length > 2)
+    {
+      io.emit('chat_message', username, msg);
+    }
+    else
+    {
+      socket.emit('username_error');
+    }
   });
 
   socket.on('announce_me', (username) => {
     io.emit('new_user', username);
+    userr = username;
+  });
+
+  socket.on('disconnect', function() {
+    io.emit('user_disconnected', g_username);
   });
 });
 

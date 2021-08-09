@@ -1,6 +1,8 @@
-function ChangeUsername()
+function AddMessage(msg)
 {
-    var username = prompt("What do you want your username to be?");
-    window.localStorage.setItem('username', username);
-    alert("Please reload the site to apply the changes!");
+    var msgItem = document.createElement('li');
+    msgItem.textContent = msg;
+    messages.appendChild(msgItem);
+    messages.appendChild(document.createElement('hr'));
+    window.scrollTo(0, document.body.scrollHeight);
 }

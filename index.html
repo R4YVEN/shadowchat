@@ -79,12 +79,33 @@
       });
 
       socket.on('new_user', function(username) {
-        var msgItem = document.createElement('li');
-        msgItem.textContent = "*[SYSTEM] " + username + " joined!";
-        messages.appendChild(msgItem);
-        messages.appendChild(document.createElement('hr'));
-        window.scrollTo(0, document.body.scrollHeight);
+        AddMessage("*[SYSTEM] " + username + " joined!");
       });
+
+      socket.on('user_disconnected', function(username) {
+        AddMessage("*[SYSTEM] " + username + " disconnected!");
+      });
+
+      socket.on('username_error', function() {
+        alert('ERROR: Invalid username!');
+      });
+
+      function ChangeUsername()
+      {
+        var username = prompt("What do you want your username to be?");
+
+        if(username.length < 12 && username.length > 2)
+        {
+          window.localStorage.setItem('username', username);
+          AddMessage("Reconnecting...");
+          socket.disconnect();
+          socket.connect();
+          socket.emit('announce_me', username);
+        }
+        else{
+          alert("ERROR: Your username is either too short or too long!");
+        }
+      }
 
     </script>
   </body>
