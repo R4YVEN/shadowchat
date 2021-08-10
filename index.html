@@ -44,8 +44,8 @@
 		      window.localStorage.setItem('username', 'user' + Math.floor(Math.random() * 10000));
 	    }
 	  
-	    var username = window.localStorage.getItem('username');
-      socket.emit('announce_me', username);
+	    var g_username = window.localStorage.getItem('username');
+      socket.emit('announce_me', g_username);
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
@@ -54,7 +54,7 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
-          socket.emit('chat_message', { username: username, msg: input.value});
+          socket.emit('chat_message', { username: g_username, msg: input.value});
           input.value = '';
         }
       });
@@ -108,15 +108,15 @@
 
       function ChangeUsername()
       {
-        var username = prompt("What do you want your username to be?");
-
-        if(username.length < 12 && username.length > 2)
+        var newUsername = prompt("What do you want your username to be?");
+        if(newUsername.length < 12 && newUsername.length > 2)
         {
-          window.localStorage.setItem('username', username);
+          window.localStorage.setItem('username', newUsername);
+          g_username = newUsername;
           AddMessage("Reconnecting...");
           socket.disconnect();
           socket.connect();
-          socket.emit('announce_me', username);
+          socket.emit('announce_me', g_username);
         }
         else{
           alert("ERROR: Your username is either too short or too long!");
