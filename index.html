@@ -62,7 +62,6 @@
       form.addEventListener('keypress', function(e)
       {
         SetTyping(e)
-        //input.setAttribute('onKeyPress', 'SetTyping("' + username + '")');
       });
 
       socket.on('chat_message', function(username, msg) {
