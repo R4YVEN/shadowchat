@@ -19,7 +19,7 @@ function TypingTimeout(){
     socket.emit('typing', {user:user, typing:false});
 }
 
-function SetTyping(e)       //Thanks Rohan1311
+function SetTyping(e)       //Thanks Rohan1311 for the timeout "system"
 {
     if(e.which!=13){
         typing = true;
