@@ -59,6 +59,9 @@ io.on('connection', (socket) => {
   }); 
 
   socket.on('disconnect', function() {
+    users = users.filter(function(user) {
+      return user.id !== socket.id
+    })
     io.emit('user_disconnected', g_username);
   });
 });
