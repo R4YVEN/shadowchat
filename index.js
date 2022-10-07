@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const port = 1337;
+const port = 80;
 
 app.use('/js', express.static('js'));
 app.use('/images', express.static('images'));
