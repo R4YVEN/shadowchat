@@ -30,6 +30,7 @@
       <input id="input" autocomplete="off" />
       <button>Send</button>
       <button onclick='ChangeUsername()'>Change Username</button>
+      <button onclick="RandomChat()">Random chat</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -41,11 +42,13 @@
 
 	    if(window.localStorage.getItem('username') == null)
 	    {
-		      window.localStorage.setItem('username', 'user' + Math.floor(Math.random() * 10000));
+		    window.localStorage.setItem('username', 'user' + Math.floor(Math.random() * 10000));
 	    }
 	  
 	    var g_username = window.localStorage.getItem('username');
-      socket.emit('announce_me', g_username);
+
+      const urlParams = new URLSearchParams(window.location.search);
+      socket.emit('announce_me', {username: g_username, chatid: urlParams.get("chatid")});
 
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
@@ -120,6 +123,22 @@
         else{
           alert("ERROR: Your username is either too short or too long!");
         }
+      }
+
+      function RandomChat()
+      {
+        var newChatId = RandomString(32);
+        window.location = "/?chatid=" + newChatId;
+      }
+
+      function RandomString(length) {
+        var result           = '';
+        var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
       }
     </script>
   </body>
