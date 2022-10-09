@@ -117,8 +117,7 @@
           g_username = newUsername;
           AddMessage("Reconnecting...");
           socket.disconnect();
-          socket.connect();
-          socket.emit('announce_me', g_username);
+          location.reload();
         }
         else{
           alert("ERROR: Your username is either too short or too long!");
